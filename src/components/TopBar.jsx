@@ -3,19 +3,19 @@ import Container from "./layout/Container";
 import { CiLocationOn } from "react-icons/ci";
 import { FaAngleDown } from "react-icons/fa";
 import { useOutsideClick } from "../hooks/useOutsideClick ";
+import Registration from '../pages/Registration'
+import Login from '../pages/Login'
+import { Link } from "react-router";
 
 export default function TopBar() {
   const [open, setOpen] = useState(false);
+  const [openTwo, setOpenTwo] = useState(false);
   const dropdownRef = useRef(null);
+  const dropdownRefTwo = useRef(null);
 
   useOutsideClick(dropdownRef, () => setOpen(false), open);
+  useOutsideClick(dropdownRefTwo, () => setOpenTwo(false), openTwo);
  
-  
-  useOutsideClick(
-    dropdownRef,
-    () => setOpen(false),
-    open
-  )
   return (
     <div className="border border-solid border-b-gry font-pop text-[#666666] text-sm py-[3.5px]">
       <Container>
@@ -41,11 +41,25 @@ export default function TopBar() {
                 </div>
               )}
             </div>
-            <div className="flex items-center">
-              USD <FaAngleDown />
+            <div className="relative" ref={dropdownRefTwo}>
+              <div
+                className="flex items-center"
+                onClick={() => setOpenTwo(!openTwo)}
+              >
+                USD <FaAngleDown />
+              </div>
+              {openTwo && (
+                <div className="absolute top-[25px] bg-gray-200 py-3 px-3">
+                  <ul>
+                    <li>BA</li>
+                    <li>CH</li>
+                  </ul>
+                </div>
+              )}
             </div>
+            
             <div className="flex items-center relative after:w-[2px] after:h-[15px] after:bg-[#E6E6E6] after:content-[] after:absolute after:top-[2px] after:left-[-10px]">
-              Sign In/Sign Up
+              <Link to='/registration'>Sign Up</Link>/<Link to ='/login'>Sign In </Link>
             </div>
           </div>
         </div>

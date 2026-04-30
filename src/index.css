@@ -7,3 +7,7 @@
      --text-hsize:32px;
      --font-pop: "Poppins", sans-serif;
 }
+@font-face {
+     font-family: poppins;
+     src: url(../src/assets/images/font/Poppins/Poppins-Regular.ttf) format('ttf');
+}
