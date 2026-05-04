@@ -1,20 +1,3 @@
-// import React from 'react'
-// import { Outlet } from 'react-router'
-// import TopBar from '../TopBar'
-// import SearchBar from '../SearchBar'
-
-// const MainlayOut = () => {
-//   return (
-// <>
-//    <TopBar/>
-//    <SearchBar/>
-//    <Outlet/>
-// </>
-// )
-// }
-
-// export default MainlayOut
-
 import React, { useState } from 'react'
 import { Outlet } from 'react-router'
 import TopBar from '../TopBar'
