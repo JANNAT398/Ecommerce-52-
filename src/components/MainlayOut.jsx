@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Outlet } from 'react-router'
 import TopBar from '../components/TopBar'
 import SearchBar from '../components/SearchBar'
+import Navbar from './Navbar'
 // import Modal from '../components/Modals'
 // import Sidebar from '../components/SideBar'
 
@@ -14,6 +15,7 @@ const MainlayOut = () => {
       <TopBar />
       {/* <div className="relative"> */}
         <SearchBar />
+        <Navbar/>
         {/* <div className="absolute right-10 top-1/2 -translate-y-1/2 flex gap-3">
           <button
             onClick={() => setModalOpen(true)}

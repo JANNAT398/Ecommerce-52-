@@ -8,7 +8,7 @@ import { FaBagShopping } from "react-icons/fa6";
 const SearchBar = () => {
   return (
     <Container>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center my-6'>
         <div>
           <img src={logo} alt="logo" fetchPriority='high' />
         </div>
