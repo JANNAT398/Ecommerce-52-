@@ -63,15 +63,15 @@ const Navbar = () => {
 
                 <ul className="space-y-3 text-black">
 
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><CiApple /> Fresh Fruit</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiFruitBowl /> Vegetables</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><IoFishOutline /> River Fish</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiChickenLeg /> Chicken & Meat</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><RiDrinksFill /> Drink & Water</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><CiIceCream /> Ice Cream</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><BsCake2 /> Cake & Bread</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiButter /> Butter & Cream</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiCampCookingPot /> Cooking</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><CiApple className='text-2xl'/> Fresh Fruit</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiFruitBowl className='text-2xl'/> Vegetables</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><IoFishOutline className='text-2xl'/> River Fish</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiChickenLeg className='text-2xl'/> Chicken & Meat</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><RiDrinksFill className='text-2xl'/> Drink & Water</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><CiIceCream className='text-2xl'/> Ice Cream</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><BsCake2 className='text-2xl'/> Cake & Bread</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiButter className='text-2xl'/> Butter & Cream</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiCampCookingPot className='text-2xl'/> Cooking</Link></li>
 
                   <li className="sidebar border-t border-b border-gray-200">
                     <Link to="#" className='flex items-center gap-2'>
@@ -101,15 +101,15 @@ const Navbar = () => {
 
                 <ul className="text-black">
 
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><CiApple /> Fresh Fruit</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiFruitBowl /> Vegetables</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><IoFishOutline /> River Fish</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiChickenLeg /> Chicken & Meat</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><RiDrinksFill /> Drink & Water</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><CiIceCream /> Ice Cream</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><BsCake2 /> Cake & Bread</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiButter /> Butter & Cream</Link></li>
-                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiCampCookingPot /> Cooking</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><CiApple className='text-2xl'/> Fresh Fruit</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiFruitBowl className='text-2xl'/> Vegetables</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><IoFishOutline className='text-2xl'/> River Fish</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiChickenLeg className='text-2xl'/> Chicken & Meat</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><RiDrinksFill className='text-2xl'/> Drink & Water</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><CiIceCream className='text-2xl'/> Ice Cream</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><BsCake2 className='text-2xl'/> Cake & Bread</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiButter className='text-2xl'/> Butter & Cream</Link></li>
+                  <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiCampCookingPot className='text-2xl'/> Cooking</Link></li>
 
                   <li className="sidebar border-t border-b border-gray-200">
                     <Link to="#" className='flex items-center gap-2'>
