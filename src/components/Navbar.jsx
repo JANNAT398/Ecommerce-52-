@@ -9,6 +9,7 @@ import { RiDrinksFill } from "react-icons/ri"
 import { CiIceCream } from "react-icons/ci"
 import { BsCake2 } from "react-icons/bs"
 import { FaPlus } from "react-icons/fa";
+import { FiPhoneCall } from "react-icons/fi";
 import { useOutsideClick } from '../hooks/useOutsideClick '
 
 
@@ -37,11 +38,14 @@ const Navbar = () => {
 
   return (
     <div className='bg-[#1A1A1A] text-white'>
-      <Container>
+  <Container>
+
+    <div className="flex justify-between items-center w-full">
+
+      <div className="flex items-center gap-8">
 
         <ul className='flex items-center gap-8 text-sm font-pop relative'>
 
-          
           <li
             onClick={() => setSideBar(true)}
             className='p-4 bg-primary cursor-pointer'
@@ -68,30 +72,35 @@ const Navbar = () => {
                   <li className="sidebar"><Link to="#" className='flex items-center gap-2'><BsCake2 /> Cake & Bread</Link></li>
                   <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiButter /> Butter & Cream</Link></li>
                   <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiCampCookingPot /> Cooking</Link></li>
-                  <li className="sidebar border-t border-b border-gray-200"><Link to="#" className='flex items-center gap-2'> <FaPlus />View all Category</Link></li>
+
+                  <li className="sidebar border-t border-b border-gray-200">
+                    <Link to="#" className='flex items-center gap-2'>
+                      <FaPlus /> View all Category
+                    </Link>
+                  </li>
+
                 </ul>
 
               </div>
             </div>
           )}
 
-         
           <div
             className="relative flex items-center cursor-pointer bg-[#333333] py-3 px-6"
             ref={dropdownRefCategories}
             onMouseEnter={() => setCategories(true)}
             onMouseLeave={() => setCategories(false)}
           >
-
-            <div className='font-bold hover:text-primary flex items-center space-x-8'>
-            <span>
-              <Link to="#">All Categories</Link>
-            </span>
-            <FaAngleDown />
+            <div className='font-bold flex items-center gap-2 hover:text-primary'>
+              <span><Link to="#">All Categories</Link></span>
+              <FaAngleDown />
             </div>
+
             {categories && (
-              <div className="absolute top-full left-0 mt-1 w-80 bg-white">
+              <div className="absolute top-full left-0 mt-1 w-80 bg-white z-50">
+
                 <ul className="text-black">
+
                   <li className="sidebar"><Link to="#" className='flex items-center gap-2'><CiApple /> Fresh Fruit</Link></li>
                   <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiFruitBowl /> Vegetables</Link></li>
                   <li className="sidebar"><Link to="#" className='flex items-center gap-2'><IoFishOutline /> River Fish</Link></li>
@@ -101,11 +110,19 @@ const Navbar = () => {
                   <li className="sidebar"><Link to="#" className='flex items-center gap-2'><BsCake2 /> Cake & Bread</Link></li>
                   <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiButter /> Butter & Cream</Link></li>
                   <li className="sidebar"><Link to="#" className='flex items-center gap-2'><GiCampCookingPot /> Cooking</Link></li>
-                  <li className="sidebar border-t border-b border-gray-200"><Link to="#" className='flex items-center gap-2'> <FaPlus />View all Category</Link></li>
+
+                  <li className="sidebar border-t border-b border-gray-200">
+                    <Link to="#" className='flex items-center gap-2'>
+                      <FaPlus /> View all Category
+                    </Link>
+                  </li>
+
                 </ul>
+
               </div>
             )}
           </div>
+
           <div
             className='relative'
             ref={dropdownRefHome}
@@ -126,6 +143,7 @@ const Navbar = () => {
               </div>
             )}
           </div>
+
           <div
             className='relative'
             ref={dropdownRefShop}
@@ -145,7 +163,8 @@ const Navbar = () => {
                 </ul>
               </div>
             )}
-          </div>   
+          </div>
+
           <div
             className='relative'
             ref={dropdownRefPages}
@@ -167,7 +186,6 @@ const Navbar = () => {
             )}
           </div>
 
-        
           <div
             className='relative'
             ref={dropdownRefBlog}
@@ -188,14 +206,21 @@ const Navbar = () => {
               </div>
             )}
           </div>
-
           <li><Link to="#" className='hover:text-primary'>About Us</Link></li>
           <li><Link to="#" className='hover:text-primary'>Contact Us</Link></li>
-
         </ul>
-
-      </Container>
+      </div>
+      <div>
+        <Link to="tel:2195550114">
+          <span className='flex text-sm gap-2 items-center text-[#FFFFFF]'>
+            <FiPhoneCall />
+            (219) 555-0114
+          </span>
+        </Link>
+      </div>
     </div>
+  </Container>
+</div>
   )
 }
 
