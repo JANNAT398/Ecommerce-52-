@@ -33,7 +33,7 @@ export default function TopBar() {
                 Eng <FaAngleDown />
               </div>
               {open && (
-                <div className="absolute top-[25px] bg-gray-200 py-3 px-3">
+                <div className="absolute top-[25px] bg-gray-200 py-3 px-3 z-10">
                   <ul>
                     <li>BA</li>
                     <li>CH</li>
