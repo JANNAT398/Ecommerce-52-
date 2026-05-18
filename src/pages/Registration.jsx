@@ -1,110 +1,71 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import axios from 'axios'
+import { toast } from 'react-toastify'
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa6";
 
 const Registration = () => {
+  let navigate = useNavigate()
+  let [showPass, setShowPass] = useState(false)
+  let [confirmPass, setConfirmPass] = useState(false)
+  const [regData, setRegData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    terms: false
+  })
 
-        const [regData, setRegData] = useState({
-          email: "",
-          password: "",
-          confirmPassword: "",
-          terms: false
-        })
+  let handleChange = (e)=>{
+    let name = e.target.name
+    let value = e.target.value
+    if(name !== 'terms'){
+      setRegData({...regData, [name]:value})
+    }else{
+      setRegData({...regData, terms: !regData.terms})
+    }
+  }
+  let handleClick = async ()=>{
+    let user = await axios.post("http://localhost:5000/registration",regData);
+    let {success, message} = user.data
+    console.log(success);
+    if (!success) {
+      toast.error(message, {
+      position: "top-center",
+      theme: "dark",
+      });
+    } else {
+      toast.success(message, {
+      position: "top-center",
+      theme: "light",
+      });
+      navigate("/login")
+    }
+  }
 
-        let handleChange = (e) => {
-
-          let name = e.target.name
-          let value = e.target.value
-
-          if (name !== 'terms') {
-            setRegData({
-              ...regData,
-              [name]: value
-            })
-          } else {
-            setRegData({
-              ...regData,
-              terms: !regData.terms
-            })
-          }
-        }
-
-        let handleClick = async () => {
-          let user = await axios.post('http://localhost:5000/registration',regData)
-          let {success} = user.data
-          console.log(success)
-          
-          console.log(regData)
-          console.log(data)
-
-        }
 
   return (
-
-          <div className='max-w-[420px] bg-white p-6 my-10 mx-auto shadow-md'>
-
-            <h3 className='font-pop text-[32px] font-semibold text-center'>
-              Create Account
-            </h3>
-
-            <input
-              onChange={handleChange}
-              name='email'
-              type="email"
-              placeholder="Email"
-              className="w-full border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 my-4 rounded-md font-pop text-sm"
-            />
-
-            <input
-              onChange={handleChange}
-              name='password'
-              type="password"
-              placeholder="Password"
-              className="w-full border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md font-pop text-sm"
-            />
-
-            <input
-              onChange={handleChange}
-              name='confirmPassword'
-              type="password"
-              placeholder="Confirm Password"
-              className="w-full border border-gray-300 my-4 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md font-pop text-sm"
-            />
-
-            <div className="flex items-center my-4 text-[#808080]">
-
-              <label className="font-pop text-sm">
-
-                <input
-                  onChange={handleChange}
-                  name='terms'
-                  type="checkbox"
-                  className="mr-2"
-                />
-
-                I agree to the Terms and Conditions
-
-              </label>
-
-            </div>
-
-            <button
-              onClick={handleClick}
-              className="w-full bg-primary text-white py-2 font-pop text-sm hover:bg-blue-600 rounded-full cursor-pointer"
-            >
-              Create Account
-            </button>
-
-            <p className='text-center mt-4 text-sm text-[#808080]'>
-              Already have account?
-
-              <Link to='/login' className='text-primary cursor-pointer'>
-                Login
-              </Link>
-
-            </p>
-
-          </div>
+    <div className="w-130 bg-white p-6 shadow-md rounded-lg mx-auto my-20">
+      <h3 className="font-semibold text-hsize text-center">Create Account</h3>
+      <input onChange={handleChange} name='email' type="email" placeholder="Email" className="fromInput"/>
+      <div className="relative mt-3">
+        <input onChange={handleChange} name='password' type={showPass ? "text" : "password"} placeholder="Password" className="fromInput"/>
+        <div className='absolute right-4 top-3/5 -translate-y-1/2 cursor-pointer text-gray-600 text-xl' onClick={() => setShowPass(!showPass)}>
+          {showPass ? <FaEye />: <FaEyeSlash />}
+        </div>
+      </div>
+      <div className="relative mt-3">
+        <input onChange={handleChange} name='confirmPassword' type={confirmPass ? "text" : "password"} placeholder="Confirm Password" className="fromInput"/>
+        <div className='absolute right-4 top-3/5 -translate-y-1/2 cursor-pointer text-gray-600 text-xl' onClick={() => setConfirmPass(!confirmPass)}>
+          {confirmPass ? <FaEye />: <FaEyeSlash />}
+        </div>
+      </div>
+      <div className="flex items-center my-4 text-[#808080]">
+        <label className="text-sm"><input onChange={handleChange} name='terms' type="checkbox" className="mr-2"/>Accept all terms & Conditions</label>
+      </div>
+      <button onClick={handleClick} className="w-full bg-primary text-white py-3.5 rounded-full text-sm">Create Account</button>
+      <p className="text-center mt-4 text-sm text-[#808080]">Already have account <Link to="/login" className="cursor-pointer text-primary">Login</Link></p>
+    </div>
   )
 }
 
