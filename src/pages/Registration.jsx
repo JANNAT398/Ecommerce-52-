@@ -15,6 +15,9 @@ const Registration = () => {
     confirmPassword: "",
     terms: false
   })
+  let [errorMsg,SetErrorMsg] = useState('')
+  let [successMsg,SetSuccessMsg] = useState('')
+
 
   let handleChange = (e)=>{
     let name = e.target.name
@@ -30,18 +33,22 @@ const Registration = () => {
     let {success, message} = user.data
     console.log(success);
     if (!success) {
+      SetErrorMsg(message);
       toast.error(message, {
-      position: "top-center",
-      theme: "dark",
+        position: "top-center",
+         theme: "dark",
+        });
+  } else {
+      SetSuccessMsg(message);   
+      toast.success("Registration Successful!", {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
       });
-    } else {
-      toast.success(message, {
-      position: "top-center",
-      theme: "light",
-      });
-      navigate("/login")
-    }
+      navigate("/login"); 
   }
+  }
+ 
 
 
   return (
@@ -65,6 +72,7 @@ const Registration = () => {
       </div>
       <button onClick={handleClick} className="w-full bg-primary text-white py-3.5 rounded-full text-sm">Create Account</button>
       <p className="text-center mt-4 text-sm text-[#808080]">Already have account <Link to="/login" className="cursor-pointer text-primary">Login</Link></p>
+  
     </div>
   )
 }
