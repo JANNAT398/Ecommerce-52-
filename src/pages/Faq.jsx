@@ -5,14 +5,14 @@ const Faq = () => {
   return (
      <>
        <Container>
-          <div className='flex items-center justify-between'>
-            <div className='max-w-[648px]'>
-            <h1 className='font-semibold font-poppins text-[48px] w-[532px]'>Welcome, Let’s Talk About Our Ecobazar</h1>
-            </div>
-            <div className='max-w-[741px] mt-[33px]'>
-              <img src={faq} alt="faq" />
-            </div>
-          </div>
+              <div className='flex items-center justify-between'>
+                <div className='50%'>
+                 
+                </div>
+                <div className='45%'>
+                 <img className='max-w-[50%] mx-end' src={faq} alt="faq" />
+                </div>
+              </div>
        </Container>
      </>
     );

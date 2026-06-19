@@ -8,10 +8,10 @@ const Banner = () => {
      <>
    <Container>
      <div className='flex my-6'>
-          <div className='max-w-[872px] mx-6'>
+          <div className='max-w-[872px]'>
             <img src={banner} alt="banner" />
           </div>
-          <div className='max-w-[423px]'>
+          <div className='max-w-[423px] ml-6'>
                <img src={banner1} alt="banner1" className='mb-6'/>
                <img src={banner2} alt="banner1" />
           </div>

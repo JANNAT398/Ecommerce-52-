@@ -7,6 +7,7 @@ import Forgot from './pages/Forgot';
 import MainlayOut from './components/MainlayOut';
 import Reset from './pages/Reset';
 import Faq from './pages/Faq';
+import Error from './pages/Error';
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
       <Route path="/forgot-password" element={<Forgot/>} />
       <Route path="/reset-password" element={<Reset/>} />
       <Route path="/faq" element={<Faq/>} />
+      <Route path="/error" element={<Error/>} />
   </Route>
 </Routes></>  
 )
