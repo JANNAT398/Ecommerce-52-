@@ -8,6 +8,7 @@ import MainlayOut from './components/MainlayOut';
 import Reset from './pages/Reset';
 import Faq from './pages/Faq';
 import Error from './pages/Error';
+import Category from './pages/Category';
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
       <Route path="/reset-password" element={<Reset/>} />
       <Route path="/faq" element={<Faq/>} />
       <Route path="/error" element={<Error/>} />
+      <Route path="/category" element={<Category/>} />
   </Route>
 </Routes></>  
 )

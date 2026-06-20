@@ -7,21 +7,33 @@ import axios from 'axios'
 
 const Home = () => {
   let[allPro,SetallPro] = useState([])
+  let[allCat,SetAllCat] = useState([])
   useEffect(() => {
     async function allPro() {
       let proData = await axios.get(
-        'https://dummyjson.com/products/category'
+        'https://dummyjson.com/products/categories'
       )
-      SetallPro(proData.data);
+      SetallPro(proData.data.slice(0,12));
     }
     allPro()
+  }, [])
+
+  useEffect(() => {
+    async function allCat() {
+      let proData = await axios.get(
+        'https://dummyjson.com/products'
+      )
+      SetAllCat(proData.data.products.slice(0,12));
+    }
+    allCat()
   }, [])
 
 
   return (
     <>
     <Banner/>
-    <ProductShowcase allPro={allPro} />
+    <ProductShowcase allData={allPro} />
+    <ProductShowcase allData={allCat} />
     </>
   )
 }
