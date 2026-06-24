@@ -3,8 +3,6 @@ import Container from "./layout/Container";
 import { CiLocationOn } from "react-icons/ci";
 import { FaAngleDown } from "react-icons/fa";
 import { useOutsideClick } from "../hooks/useOutsideClick ";
-import Registration from '../pages/Registration'
-import Login from '../pages/Login'
 import { Link } from "react-router";
 
 export default function TopBar() {

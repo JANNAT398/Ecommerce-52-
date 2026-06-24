@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Outlet, useLocation } from 'react-router'
 import TopBar from '../components/TopBar'
 import SearchBar from '../components/SearchBar'
@@ -7,19 +7,21 @@ import Footer from './Footer'
 import FooterTop from './FooterTop'
 import Breadcrumb from './Breadcrumb'
 
+const hideBreadcrumb = ['/', '/login', '/registration', '/forgot-password', '/reset-password', '/otp']
+
 const MainlayOut = () => {
-let pageName=useLocation().pathname
-console.log(pageName.pathname)
+  const { pathname } = useLocation()
+
   return (
     <>
       <TopBar />
-        <SearchBar />
-        <Navbar/>
-        {pageName !== '/' && <Breadcrumb/> }
+      <SearchBar />
+      <Navbar />
+      {!hideBreadcrumb.includes(pathname) && <Breadcrumb />}
       <Outlet />
-      <FooterTop/>
-      <Footer/>
-      </>
+      <FooterTop />
+      <Footer />
+    </>
   )
 }
 

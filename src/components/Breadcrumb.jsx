@@ -1,26 +1,36 @@
-import { useLocation } from 'react-router';
+import { useLocation, Link } from 'react-router'
 import breadcrumbs from '../assets/images/breadcrumbs .webp'
-import Container from './layout/Container';
-import { MdHome } from "react-icons/md";
+import Container from './layout/Container'
+import { MdHome } from 'react-icons/md'
 
 const Breadcrumb = () => {
-  const pageName = useLocation()
-  const arr = pageName.pathname.split('/')
-  console.log(pageName.pathname);
-  
+  const { pathname } = useLocation()
+  const segments = pathname.split('/').filter(Boolean)
+
+  const formatLabel = (segment) =>
+    segment.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+
   return (
-    <div style={{background: `url(${breadcrumbs})`}}>
-        <Container>
-          <div className="flex items-center gap-3 py-12">
-            <MdHome className="text-[#808080] text-2xl"/>
-            {arr.map((item, index) =>(
-              <span key={index} className="text-base text-[#999999]">
-                {item.charAt(0).toUpperCase() + item.slice(1)}
-                {index < arr.length - 1 && <span className="mx-2 text-[#808080]">{"/".replace("/",">")}</span>}
-              </span>
-            ))}
-          </div>
-        </Container>
+    <div style={{ background: `url(${breadcrumbs})` }}>
+      <Container>
+        <div className="flex items-center gap-3 py-12">
+          <Link to="/">
+            <MdHome className="text-[#808080] text-2xl hover:text-primary" />
+          </Link>
+          {segments.map((segment, index) => (
+            <span key={index} className="flex items-center gap-3 text-base text-[#999999] font-pop">
+              <span className="text-[#808080]">&gt;</span>
+              {index === segments.length - 1 ? (
+                <span>{formatLabel(segment)}</span>
+              ) : (
+                <Link to={`/${segments.slice(0, index + 1).join('/')}`} className="hover:text-primary">
+                  {formatLabel(segment)}
+                </Link>
+              )}
+            </span>
+          ))}
+        </div>
+      </Container>
     </div>
   )
 }
