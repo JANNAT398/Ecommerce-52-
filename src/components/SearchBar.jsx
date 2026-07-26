@@ -25,41 +25,65 @@ const SearchBar = () => {
 
   return (
     <Container>
-      <div className="flex justify-between items-center my-6">
-        <Link to="/">
-          <img src={logo} alt="logo" fetchPriority="high" />
-        </Link>
-        <form onSubmit={handleSearch} className="relative flex">
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search"
-            className="border border-[#808080] w-[400px] py-3 pl-11 placeholder:text-[#808080] placeholder:font-pop placeholder:text-sm rounded-tl-md rounded-bl-md"
-          />
-          <FaSearch className="absolute left-4 top-0 translate-y-1/2 text-gray-500 text-2xl" />
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4 py-4 md:py-6">
+        <div className="flex justify-between items-center w-full md:w-auto">
+          <Link to="/" className="shrink-0">
+            <img src={logo} alt="logo" fetchPriority="high" className="h-8 sm:h-10 w-auto" />
+          </Link>
+          <div className="flex md:hidden items-center gap-4">
+            <Link to="/wishlist" className="relative p-1">
+              <Heart />
+              {wishlistCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-primary text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-pop">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+            <Link to="/cart" className="relative p-1">
+              <FaBagShopping className="text-2xl text-gray-800" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-primary text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-pop">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+          </div>
+        </div>
+
+        <form onSubmit={handleSearch} className="relative flex w-full md:w-[380px] lg:w-[480px]">
+          <div className="relative flex-1 flex items-center">
+            <FaSearch className="absolute left-3.5 text-gray-400 text-base pointer-events-none" />
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search products..."
+              className="border border-gray-300 w-full py-2.5 sm:py-3 pl-10 pr-3 placeholder:text-gray-400 placeholder:font-pop text-sm rounded-l-md focus:outline-none focus:border-primary"
+            />
+          </div>
           <button
             type="submit"
-            className="font-pop font-semibold text-sm text-white px-6 py-3.5 bg-primary rounded-br-md rounded-tr-md"
+            className="font-pop font-semibold text-xs sm:text-sm text-white px-5 sm:px-6 py-2.5 sm:py-3 bg-primary rounded-r-md hover:bg-opacity-90 transition-colors shrink-0"
           >
             Search
           </button>
         </form>
-        <div className="flex gap-x-8 items-center">
+
+        <div className="hidden md:flex gap-x-6 lg:gap-x-8 items-center shrink-0">
           <Link
             to="/wishlist"
-            className="relative after:w-[2px] after:h-[25px] after:bg-gry after:content-[''] after:absolute after:top-[5px] after:right-[-16px]"
+            className="relative pr-6 border-r border-gray-200"
           >
             <Heart />
             {wishlistCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-pop">
+              <span className="absolute -top-2 right-4 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-pop">
                 {wishlistCount}
               </span>
             )}
           </Link>
-          <Link to="/cart" className="flex gap-x-3 items-center">
+          <Link to="/cart" className="flex gap-x-3 items-center hover:opacity-90">
             <div className="relative">
-              <FaBagShopping className="text-[34px]" />
+              <FaBagShopping className="text-3xl text-gray-800" />
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-pop">
                   {cartCount}
@@ -67,9 +91,8 @@ const SearchBar = () => {
               )}
             </div>
             <div>
-              <span className="font-pop text-sm">Shopping cart:</span>
-              <br />
-              <span className="font-pop text-md font-bold">${cartTotal.toFixed(2)}</span>
+              <span className="font-pop text-xs text-gray-500 block">Shopping cart:</span>
+              <span className="font-pop text-sm font-bold text-gray-900">${cartTotal.toFixed(2)}</span>
             </div>
           </Link>
         </div>

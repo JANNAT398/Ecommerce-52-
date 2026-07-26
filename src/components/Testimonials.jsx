@@ -1,105 +1,168 @@
-import React, { useState, useEffect } from 'react'
-import Container from './layout/Container'
-import { FaChevronLeft, FaChevronRight, FaQuoteLeft, FaStar } from 'react-icons/fa'
+import React from 'react'
+import Container from '../components/layout/Container'
+import { BiSolidQuoteAltRight } from "react-icons/bi";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/scrollbar';
+import { Navigation, Autoplay } from 'swiper/modules';
+import review1 from '../assets/images/review1.webp'
+import review2 from '../assets/images/review2.webp'
+import review3 from '../assets/images/review3.webp'
+import { FaArrowLeft, FaArrowRight, FaStar } from 'react-icons/fa';
+
 
 const Testimonials = () => {
-  const [current, setCurrent] = useState(0)
-  const testimonials = [
-    {
-      name: 'Robert Fox',
-      role: 'Customer',
-      avatar: 'https://i.pravatar.cc/48?u=robert',
-      text: 'Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget.'
+    let slider1 = {
+    spaceBetween: 24,
+    slidesPerView: 1,
+    navigation: {
+      prevEl: ".prevarrow",
+      nextEl: ".nextarrow",
     },
-    {
-      name: 'Dianne Russell',
-      role: 'Customer',
-      avatar: 'https://i.pravatar.cc/48?u=dianne',
-      text: 'Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget.'
+     breakpoints:{
+      769: {
+        slidesPerView: 3,
+      },
     },
-    {
-      name: 'Eleanor Pena',
-      role: 'Customer',
-      avatar: 'https://i.pravatar.cc/48?u=eleanor',
-      text: 'Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget.'
-    }
-  ]
-
-  const next = () => {
-    setCurrent(prev => (prev === testimonials.length - 1 ? 0 : prev + 1))
+    loop: true,
+    autoplay : {
+      delay: 1000,
+      disableOnInteraction: false,
+    },
+    modules: [ Navigation, Autoplay ],
   }
-
-  const prev = () => {
-    setCurrent(prev => (prev === 0 ? testimonials.length - 1 : prev - 1))
-  }
-
-  useEffect(() => {
-    const interval = setInterval(next, 3000)
-    return () => clearInterval(interval)
-  }, [])
-
   return (
-    <Container className='py-12'>
-      <div className='flex justify-between items-center mb-8'>
-        <h2 className='text-3xl font-bold font-pop text-black'>Client Testimonials</h2>
-        <div className='flex gap-2'>
-          <button
-            onClick={prev}
-            className='w-10 h-10 rounded-full border border-green-600 text-green-600 flex items-center justify-center hover:bg-green-50 transition-colors cursor-pointer'
-          >
-            <FaChevronLeft size={16} />
-          </button>
-          <button
-            onClick={next}
-            className='w-10 h-10 rounded-full border border-green-600 text-green-600 flex items-center justify-center hover:bg-green-50 transition-colors cursor-pointer'
-          >
-            <FaChevronRight size={16} />
-          </button>
-        </div>
-      </div>
+    <div className="w-full bg-gray-50 py-15">
+        <Container>
+            <div className="flex justify-between items-center mb-8">
+                <h2 className="text-xl lg:text-3xl font-semibold">Client Testimonial</h2>
 
-      <div className='relative overflow-hidden'>
-        <div 
-          className='flex transition-transform duration-500'
-          style={{ transform: `translateX(-${current * 100}%)` }}
-        >
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className='min-w-full'>
-              <div className='grid grid-cols-3 gap-6'>
-                {testimonials.map((t, i) => (
-                  <div 
-                    key={i} 
-                    className={`bg-white p-6 rounded-lg shadow-sm border transition-all duration-300 ${
-                      i === current ? 'border-green-600 shadow-md' : 'border-gray-100'
-                    }`}
-                  >
-                    <FaQuoteLeft size={24} className={`mb-4 ${i === current ? 'text-green-500' : 'text-green-200'}`} />
-                    <p className='text-sm text-gray-600 mb-6 leading-relaxed font-pop'>{t.text}</p>
-                    <div className='flex items-center gap-4'>
-                      <img src={t.avatar} alt={t.name} className='w-12 h-12 rounded-full object-cover' />
-                      <div>
-                        <h4 className={`font-semibold font-pop text-base ${i === current ? 'text-green-700' : 'text-gray-800'}`}>{t.name}</h4>
-                        <p className='text-xs text-gray-500 font-pop'>{t.role}</p>
-                      </div>
-                      <div className='flex gap-1 ml-auto'>
-                        {[1,2,3,4,5].map(star => (
-                          <FaStar 
-                            key={star} 
-                            size={12} 
-                            fill='currentColor' 
-                            className={i === current ? 'text-green-500' : 'text-orange-400'} 
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                <div className="flex gap-3">
+                    <button className="prevarrow w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-gray-200 flex items-center justify-center text-primary hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
+                        <FaArrowLeft />
+                    </button>
+
+                    <button className="nextarrow w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-gray-200 flex items-center justify-center text-primary hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
+                        <FaArrowRight />
+                    </button>
+                </div>
             </div>
-          ))}
-        </div>
-      </div>
-    </Container>
+            <Swiper {...slider1} >
+                <SwiperSlide>
+                    <div className="bg-white w-100 p-6 rounded-lg">
+                        <div>
+                            <BiSolidQuoteAltRight className="text-3xl text-primary"/>
+                        </div>
+                        <div className="py-4 pr-4">
+                            <p className="text-lg text-gray-700">Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget</p>
+                        </div>
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                                <div className="pr-1">
+                                    <img src={review1} alt="review1" />
+                                </div>
+                                <div>
+                                    <h4 className="text-base text-gray-900">Robert Fox</h4>
+                                    <p className="text-lg text-gray-400">Customer</p>
+                                </div>
+                            </div>
+                            <div className="flex">
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                            </div>
+                        </div>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <div className="bg-white w-100 p-6 rounded-lg">
+                        <div>
+                            <BiSolidQuoteAltRight className="text-3xl text-primary"/>
+                        </div>
+                        <div className="py-4 pr-4">
+                            <p className="text-lg text-gray-700">Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget</p>
+                        </div>
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                                <div className="pr-1">
+                                    <img src={review2} alt="review2" />
+                                </div>
+                                <div>
+                                    <h4 className="text-base text-gray-900">Dianne Russell</h4>
+                                    <p className="text-lg text-gray-400">Customer</p>
+                                </div>
+                            </div>
+                            <div className="flex">
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                            </div>
+                        </div>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <div className="bg-white w-100 p-6 rounded-lg">
+                        <div>
+                            <BiSolidQuoteAltRight className="text-3xl text-primary"/>
+                        </div>
+                        <div className="py-4 pr-4">
+                            <p className="text-lg text-gray-700">Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget</p>
+                        </div>
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                                <div className="pr-1">
+                                    <img src={review3} alt="review3" />
+                                </div>
+                                <div>
+                                    <h4 className="text-base text-gray-900">Eleanor Pena</h4>
+                                    <p className="text-lg text-gray-400">Customer</p>
+                                </div>
+                            </div>
+                            <div className="flex">
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                            </div>
+                        </div>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <div className="bg-white w-100 p-6 rounded-lg">
+                        <div>
+                            <BiSolidQuoteAltRight className="text-3xl text-primary"/>
+                        </div>
+                        <div className="py-4 pr-4">
+                            <p className="text-lg text-gray-700">Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget</p>
+                        </div>
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                                <div className="pr-1">
+                                    <img src={review1} alt="review1" />
+                                </div>
+                                <div>
+                                    <h4 className="text-base text-gray-900">Robert Fox</h4>
+                                    <p className="text-lg text-gray-400">Customer</p>
+                                </div>
+                            </div>
+                            <div className="flex">
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                                <FaStar className="text-yellow-400" />
+                            </div>
+                        </div>
+                    </div>
+                </SwiperSlide>
+            </Swiper>
+        </Container>
+    </div>
   )
 }
 

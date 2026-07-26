@@ -17,47 +17,49 @@ export default function TopBar() {
   return (
     <div className="border border-solid border-b-gry font-pop text-[#666666] text-sm py-[3.5px]">
       <Container>
-        <div className="flex justify-between relative">
-          <div className="flex items-center gap-x-1">
-            <CiLocationOn />
-            Store Location: Lincoln- 344, Illinois, Chicago, USA
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-xs sm:text-sm">
+          <div className="hidden sm:flex items-center gap-x-1 truncate">
+            <CiLocationOn className="shrink-0" />
+            <span className="truncate">Store Location: Lincoln- 344, Illinois, Chicago, USA</span>
           </div>
-          <div className="flex gap-x-5 items-center">
+          <div className="flex gap-x-4 sm:gap-x-5 items-center justify-between sm:justify-end w-full sm:w-auto">
             <div className="relative" ref={dropdownRef}>
               <div
-                className="flex items-center"
+                className="flex items-center gap-1 cursor-pointer hover:text-primary"
                 onClick={() => setOpen(!open)}
               >
-                Eng <FaAngleDown />
+                Eng <FaAngleDown className="text-xs" />
               </div>
               {open && (
-                <div className="absolute top-[25px] bg-gray-200 py-3 px-3 z-10">
-                  <ul>
-                    <li>BA</li>
-                    <li>CH</li>
+                <div className="absolute top-[25px] left-0 bg-white border border-gray-200 shadow-md py-2 px-3 z-50 rounded">
+                  <ul className="space-y-1">
+                    <li className="hover:text-primary cursor-pointer">Eng</li>
+                    <li className="hover:text-primary cursor-pointer">Ban</li>
                   </ul>
                 </div>
               )}
             </div>
             <div className="relative" ref={dropdownRefTwo}>
               <div
-                className="flex items-center"
+                className="flex items-center gap-1 cursor-pointer hover:text-primary"
                 onClick={() => setOpenTwo(!openTwo)}
               >
-                USD <FaAngleDown />
+                USD <FaAngleDown className="text-xs" />
               </div>
               {openTwo && (
-                <div className="absolute top-[25px] bg-gray-200 py-3 px-3">
-                  <ul>
-                    <li>BA</li>
-                    <li>CH</li>
+                <div className="absolute top-[25px] left-0 bg-white border border-gray-200 shadow-md py-2 px-3 z-50 rounded">
+                  <ul className="space-y-1">
+                    <li className="hover:text-primary cursor-pointer">USD</li>
+                    <li className="hover:text-primary cursor-pointer">BDT</li>
                   </ul>
                 </div>
               )}
             </div>
             
-            <div className="flex items-center relative after:w-[2px] after:h-[15px] after:bg-[#E6E6E6] after:content-[] after:absolute after:top-[2px] after:left-[-10px]">
-              <Link to='/registration'>Sign Up</Link>/<Link to ='/login'>Sign In </Link>
+            <div className="flex items-center gap-1 border-l border-gray-300 pl-3">
+              <Link to="/registration" className="hover:text-primary">Sign Up</Link>
+              <span>/</span>
+              <Link to="/login" className="hover:text-primary">Sign In</Link>
             </div>
           </div>
         </div>

@@ -49,7 +49,7 @@ const Home = () => {
       <SpecialBanner />
       
       {/* Hot Deals */}
-      <HotDeals />
+      <HotDeals/>
       
       {/* Testimonials */}
       <Testimonials />

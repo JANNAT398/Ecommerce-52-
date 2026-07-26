@@ -1,50 +1,71 @@
-import React from 'react'
-import Container from './layout/Container'
-import banner from '../assets/images/banner.webp'
-import banner1 from '../assets/images/banner1.webp'
-import banner2 from '../assets/images/banner2.webp'
-import fruit from '../assets/images/fruit.webp'
+import React, { useRef, useState } from 'react'
+import Container from '../components/layout/Container'
+import useDropdown from '../hooks/useDropdown'
+import venobox1 from '../assets/images/venobox1.webp'
+import venobox2 from '../assets/images/venobox2.webp'
+import venobox3 from '../assets/images/venobox3.webp'
+import venobox4 from '../assets/images/venobox4.webp'
+import venobox5 from '../assets/images/venobox5.webp'
+import venobox6 from '../assets/images/venobox6.webp'
+import { FaInstagram } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
 
-const InstagramSection = () => {
-  const images = [
-    banner,
-    fruit,
-    banner1,
-    banner2,
-    banner,
-    banner1
-  ]
+const images = [venobox1, venobox2, venobox3, venobox4, venobox5, venobox6]
 
-  const brands = ['steps', 'MANGO', 'food', 'FOOD', 'BOOKOFF', 'GSeries']
+const IstragramSection = () => {
+  const [dropdown, setDropdown] = useState(null)
+  const venoRef = useRef(null)
+
+  useDropdown(venoRef, () => setDropdown(null), dropdown !== null)
 
   return (
-    <>
-      <Container className="py-8">
-        <div className="flex justify-around items-center opacity-50">
-          {brands.map((brand, index) => (
-            <div key={index} className="text-2xl font-bold font-pop tracking-widest">
-              {brand}
-            </div>
-          ))}
+    <Container>
+      <div className="">
+        <div className="text-center my-8">
+          <h4 className="text-xl lg:text-hsize font-semibold">Follow us on Instagram</h4>
         </div>
-      </Container>
-      
-      <Container className="py-12">
-        <div className="flex justify-center items-center gap-8 mb-8 overflow-hidden">
-          <div className="flex-1 h-[1px] bg-gray-200"></div>
-          <h2 className="font-pop font-bold text-gray-800">Follow us on Instagram</h2>
-          <div className="flex-1 h-[1px] bg-gray-200"></div>
-        </div>
-        <div className="grid grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-6 gap-6 pb-15" ref={venoRef}>
           {images.map((img, index) => (
-            <div key={index} className="aspect-square rounded-lg overflow-hidden hover:opacity-80 transition-opacity cursor-pointer">
-              <img src={img} alt={`Instagram ${index + 1}`} className="w-full h-full object-cover" />
+          <div
+            key={index}
+            onClick={() => setDropdown(index)}
+            className="relative overflow-hidden rounded-xl cursor-pointer group"
+          >
+            <img
+              src={img}
+              alt="venobox"
+              className="duration-300 group-hover:scale-110"
+            />
+
+            {/* Black Overlay */}
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 duration-300"></div>
+
+            {/* Instagram Icon */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300 z-10">
+              <FaInstagram className="text-white text-4xl" />
             </div>
-          ))}
+          </div>
+        ))}
         </div>
-      </Container>
-    </>
+      </div>
+
+      {dropdown !== null && (
+        <div
+          onClick={() => setDropdown(null)}
+          className="w-full h-screen bg-[#00000072] top-0 left-0 fixed z-20 flex justify-center items-center"
+        >
+           {/* Close Button */}
+    <button
+      onClick={() => setDropdown(null)}
+      className="absolute top-6 right-6 text-white text-5xl hover:text-red-500 duration-300 cursor-pointer"
+    >
+      <IoClose />
+    </button>
+          <img className="w-100" src={images[dropdown]} alt="venobox" />
+        </div>
+      )}
+    </Container>
   )
 }
 
-export default InstagramSection
+export default IstragramSection
