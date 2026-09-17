@@ -18,22 +18,33 @@ const ProductShowcase = ({ allData, title, isCategory, viewAllLink = '/category'
       </div>
       {isCategory ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-6">
-          {allData.map((item) => (
-            <Link
-              key={item.slug || item.id}
-              to={`/shop?category=${item.slug}`}
-              className="border rounded-lg p-3 sm:p-4 hover:shadow-lg transition-all duration-300 cursor-pointer overflow-hidden border-gray-200 hover:border-green-500 hover:shadow-md bg-white"
-            >
-              <div className="flex justify-center items-center h-32 sm:h-44 md:h-52 rounded-md mb-3 overflow-hidden">
-                <img src={item.image || fruit} alt={item.name} className="w-full h-full object-cover" />
-              </div>
-              <div className="text-center">
-                <h3 className="font-pop font-semibold text-xs sm:text-sm md:text-base transition-colors duration-300 text-gray-800 hover:text-green-600 line-clamp-1">
-                  {item.name}
-                </h3>
-              </div>
-            </Link>
-          ))}
+          {allData.map((item) => {
+            const isSelected = item.isActive
+            return (
+              <Link
+                key={item.slug || item.id || item.name}
+                to={`/shop?category=${item.slug}`}
+                className={`group border rounded-lg p-3 sm:p-4 transition-all duration-300 cursor-pointer bg-white flex flex-col items-center justify-between ${
+                  isSelected
+                    ? 'border-primary text-primary shadow-sm'
+                    : 'border-gray-200 text-gray-800 hover:border-primary hover:text-primary hover:shadow-md'
+                }`}
+              >
+                <div className="w-full h-28 sm:h-32 md:h-36 flex items-center justify-center mb-2 sm:mb-3 overflow-hidden">
+                  <img
+                    src={item.image || fruit}
+                    alt={item.name}
+                    className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div className="text-center">
+                  <h3 className="font-pop font-semibold text-xs sm:text-sm md:text-base line-clamp-1 transition-colors duration-300">
+                    {item.name}
+                  </h3>
+                </div>
+              </Link>
+            )
+          })}
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-0 border border-gray-200 rounded-lg overflow-hidden">

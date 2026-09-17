@@ -23,73 +23,103 @@ const ProductCard = ({ product }) => {
     toast.info(isWishlisted ? 'Removed from wishlist' : 'Added to wishlist')
   }
 
-  return (
-    <div className="border-t border-b border-l border-r border-gray-200 p-4 transition-all duration-300 relative group overflow-hidden">
-      {product.sale && (
-        <div className="absolute top-3 left-3 z-20">
-          <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded">Sale 50%</span>
-        </div>
-      )}
+  const discountPercent = product.discount
+    ? product.discount
+    : product.oldPrice && product.oldPrice > product.price
+      ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
+      : 50
 
-      <div className="h-48 mb-4 relative overflow-hidden flex items-center justify-center">
+  return (
+    <div className="bg-white border border-gray-200 hover:border-primary hover:shadow-md transition-all duration-300 relative group p-4 flex flex-col justify-between h-full">
+      <div>
+        {/* Top Section: Sale Badge, Hover Icons & Image */}
+        <div className="relative mb-3">
+          {product.sale && (
+            <div className="absolute top-0 left-0 z-10">
+              <span className="bg-red-500 text-white text-xs font-medium px-2.5 py-1 rounded font-pop">
+                Sale {discountPercent}%
+              </span>
+            </div>
+          )}
+
+          {/* Hover Action Buttons */}
+          <div className="absolute top-0 right-0 z-10 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <button
+              type="button"
+              onClick={handleWishlist}
+              className={`w-9 h-9 rounded-full flex items-center justify-center border transition-colors shadow-sm bg-white ${
+                isWishlisted
+                  ? 'text-red-500 border-red-200 bg-red-50'
+                  : 'text-gray-600 border-gray-200 hover:bg-primary hover:text-white hover:border-primary'
+              }`}
+              title="Add to Wishlist"
+            >
+              <FaHeart size={14} />
+            </button>
+            <Link
+              to={`/product/${product.id}`}
+              className="w-9 h-9 rounded-full flex items-center justify-center border border-gray-200 bg-white text-gray-600 hover:bg-primary hover:text-white hover:border-primary transition-colors shadow-sm"
+              title="Quick View"
+            >
+              <FaEye size={14} />
+            </Link>
+          </div>
+
+          {/* Product Image */}
+          <div className="h-44 sm:h-48 flex items-center justify-center p-2">
+            <Link to={`/product/${product.id}`} className="w-full h-full flex items-center justify-center">
+              <img
+                src={product.image || fruit}
+                alt={product.name}
+                className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
+              />
+            </Link>
+          </div>
+        </div>
+
+        {/* Product Title */}
         <Link to={`/product/${product.id}`}>
-          <img
-            src={product.image || fruit}
-            alt={product.name}
-            className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
-          />
+          <h3 className="font-pop font-normal text-sm sm:text-base text-gray-700 hover:text-primary transition-colors line-clamp-1 mb-2">
+            {product.name}
+          </h3>
         </Link>
-        <div className="absolute top-3 right-3 flex flex-col gap-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      </div>
+
+      <div>
+        {/* Price Row & Cart Button */}
+        <div className="flex items-center justify-between mb-1.5">
+          <div className="flex items-center gap-1.5 font-pop">
+            <span className="font-semibold text-base text-gray-900">
+              ${Number(product.price).toFixed(2)}
+            </span>
+            {product.oldPrice && (
+              <span className="text-sm text-gray-400 line-through">
+                ${Number(product.oldPrice).toFixed(2)}
+              </span>
+            )}
+          </div>
           <button
             type="button"
-            onClick={handleWishlist}
-            className={`w-8 h-8 bg-white rounded-full flex items-center justify-center shadow transition-colors ${
-              isWishlisted ? 'text-red-500' : 'text-gray-600 hover:bg-primary hover:text-white'
-            }`}
+            onClick={handleAddToCart}
+            className="w-9 h-9 rounded-full flex items-center justify-center transition-colors bg-[#F2F2F2] border border-gray-200 text-gray-700 group-hover:bg-primary group-hover:text-white group-hover:border-primary hover:bg-primary hover:text-white"
+            title="Add to Cart"
           >
-            <FaHeart size={12} />
+            <FaShoppingBag size={14} />
           </button>
-          <Link
-            to={`/product/${product.id}`}
-            className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow hover:bg-primary hover:text-white transition-colors text-gray-600"
-          >
-            <FaEye size={12} />
-          </Link>
         </div>
-      </div>
 
-      <div className="flex items-center gap-1 mb-2 text-orange-400">
-        {[...Array(5)].map((_, i) => (
-          <FaStar
-            key={i}
-            size={12}
-            fill={i < product.ratingCount ? 'currentColor' : 'none'}
-            strokeWidth={i < product.ratingCount ? 0 : 1.5}
-            className={i < product.ratingCount ? '' : 'text-gray-300'}
-          />
-        ))}
-      </div>
-
-      <Link to={`/product/${product.id}`}>
-        <h3 className="font-pop font-medium text-sm text-gray-800 mb-2 hover:text-primary">{product.name}</h3>
-      </Link>
-
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="font-pop font-bold text-gray-800">${product.price.toFixed(2)}</span>
-          {product.oldPrice && (
-            <span className="font-pop text-sm text-gray-400 line-through">
-              ${product.oldPrice.toFixed(2)}
-            </span>
-          )}
+        {/* Rating Stars (Below Price) */}
+        <div className="flex items-center gap-1 text-amber-400">
+          {[...Array(5)].map((_, i) => (
+            <FaStar
+              key={i}
+              size={12}
+              fill={i < product.ratingCount ? 'currentColor' : 'none'}
+              strokeWidth={i < product.ratingCount ? 0 : 1.5}
+              className={i < product.ratingCount ? 'text-amber-400' : 'text-gray-300'}
+            />
+          ))}
         </div>
-        <button
-          type="button"
-          onClick={handleAddToCart}
-          className="w-9 h-9 rounded-full flex items-center justify-center transition-colors bg-white border border-gray-200 text-gray-600 hover:bg-primary hover:text-white"
-        >
-          <FaShoppingBag size={14} />
-        </button>
       </div>
     </div>
   )
