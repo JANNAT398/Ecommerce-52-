@@ -1,24 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router'
 import Container from './layout/Container'
 import ProductCard from '../components/ProductCard'
 import fruit from '../assets/images/fruit.webp'
 
-const ProductShowcase = ({ allData, title, isCategory, viewAllLink = '/category' }) => {
+const ProductShowcase = ({ allData, title, isCategory, viewAllLink }) => {
+  const [showAll, setShowAll] = useState(false)
+
+  // Default to 1 row (5 items on 5-col grid) when showAll is false
+  const displayedData = isCategory
+    ? allData
+    : (showAll ? allData : allData.slice(0, 5))
+
+  const handleViewAllClick = (e) => {
+    if (!isCategory) {
+      e.preventDefault()
+      setShowAll((prev) => !prev)
+    }
+  }
+
   return (
     <Container className="py-6 sm:py-10">
       <div className="flex justify-between items-center mb-6 sm:mb-8">
         <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold font-pop text-black">{title}</h2>
-        <Link
-          to={viewAllLink}
-          className="text-green-600 font-semibold font-pop hover:underline text-sm sm:text-base lg:text-lg shrink-0"
-        >
-          View All →
-        </Link>
+        {viewAllLink && isCategory ? (
+          <Link
+            to={viewAllLink}
+            className="text-green-600 font-semibold font-pop hover:underline text-sm sm:text-base lg:text-lg shrink-0"
+          >
+            View All →
+          </Link>
+        ) : (
+          <button
+            type="button"
+            onClick={handleViewAllClick}
+            className="text-green-600 font-semibold font-pop hover:underline text-sm sm:text-base lg:text-lg shrink-0 cursor-pointer"
+          >
+            {showAll ? 'Show Less ←' : 'View All →'}
+          </button>
+        )}
       </div>
+
       {isCategory ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-6">
-          {allData.map((item) => {
+          {displayedData.map((item) => {
             const isSelected = item.isActive
             return (
               <Link
@@ -48,7 +73,7 @@ const ProductShowcase = ({ allData, title, isCategory, viewAllLink = '/category'
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-0 border border-gray-200 rounded-lg overflow-hidden">
-          {allData.map((item) => (
+          {displayedData.map((item) => (
             <ProductCard key={item.id} product={item} />
           ))}
         </div>

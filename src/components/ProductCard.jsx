@@ -47,11 +47,10 @@ const ProductCard = ({ product }) => {
             <button
               type="button"
               onClick={handleWishlist}
-              className={`w-9 h-9 rounded-full flex items-center justify-center border transition-colors shadow-sm bg-white ${
-                isWishlisted
-                  ? 'text-red-500 border-red-200 bg-red-50'
-                  : 'text-gray-600 border-gray-200 hover:bg-primary hover:text-white hover:border-primary'
-              }`}
+              className={`w-9 h-9 rounded-full flex items-center justify-center border transition-colors shadow-sm bg-white ${isWishlisted
+                ? 'text-red-500 border-red-200 bg-red-50'
+                : 'text-gray-600 border-gray-200 hover:bg-primary hover:text-white hover:border-primary'
+                }`}
               title="Add to Wishlist"
             >
               <FaHeart size={14} />
