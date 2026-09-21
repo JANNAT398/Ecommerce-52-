@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import Container from './layout/Container'
-import bannerImg from '../assets/images/discountbanner.png'
+import bannerImg from '../assets/images/discountbanner.webp'
 import { FaArrowRight } from 'react-icons/fa'
 
 const SummerSaleBanner = () => {

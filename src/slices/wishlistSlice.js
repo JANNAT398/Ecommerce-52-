@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { getProductById } from '../data/products'
 
 const loadWishlist = () => {
   try {
     const saved = localStorage.getItem('wishlist')
-    return saved ? JSON.parse(saved) : []
+    if (!saved) return []
+    const parsed = JSON.parse(saved)
+    return parsed.map((item) => getProductById(item.id) || item)
   } catch {
     return []
   }

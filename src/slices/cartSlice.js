@@ -1,9 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { getProductById } from '../data/products'
 
 const loadCart = () => {
   try {
     const saved = localStorage.getItem('cart')
-    return saved ? JSON.parse(saved) : []
+    if (!saved) return []
+    const parsed = JSON.parse(saved)
+    return parsed.map((item) => {
+      const fresh = getProductById(item.id)
+      return fresh ? { ...fresh, qty: item.qty } : item
+    })
   } catch {
     return []
   }

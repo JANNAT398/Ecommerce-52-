@@ -3,20 +3,28 @@ import { Link } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import Container from '../components/layout/Container'
 import { removeFromCart, updateQty, selectCartItems, selectCartTotal } from '../slices/cartSlice'
+import { useFormatPrice } from '../hooks/useFormatPrice'
+import { useTranslation } from '../hooks/useTranslation'
+import { selectCurrencyInfo } from '../slices/appSettingsSlice'
+import { resolveProductImage } from '../utils/productImage'
 
 const Cart = () => {
   const dispatch = useDispatch()
+  const formatPrice = useFormatPrice()
+  const { t } = useTranslation()
   const items = useSelector(selectCartItems)
   const total = useSelector(selectCartTotal)
-  const shipping = total > 5 ? 0 : 2.99
+  const currencyInfo = useSelector(selectCurrencyInfo)
+  const shippingUSD = total > 5 ? 0 : 2.99
+  const totalUSD = total + shippingUSD
 
   if (items.length === 0) {
     return (
       <Container className="py-20 text-center">
-        <h1 className="font-pop text-2xl font-bold mb-4">Your cart is empty</h1>
-        <p className="font-pop text-gray-500 mb-8">Add some products to get started.</p>
+        <h1 className="font-pop text-2xl font-bold mb-4">{t('yourCart')} {t('empty').toLowerCase()}</h1>
+        <p className="font-pop text-gray-500 mb-8">{t('yourCart')}: {formatPrice(0)} — Add some products to get started.</p>
         <Link to="/shop" className="bg-primary text-white px-8 py-3 rounded-full font-pop text-sm">
-          Continue Shopping
+          {t('shopNow')}
         </Link>
       </Container>
     )
@@ -24,15 +32,15 @@ const Cart = () => {
 
   return (
     <Container className="py-12">
-      <h1 className="font-pop text-2xl font-bold mb-8">Shopping Cart</h1>
-      <div className="flex gap-8">
+      <h1 className="font-pop text-2xl font-bold mb-8">{t('shoppingCart')} <span className="text-primary text-base font-normal ml-2">({currencyInfo.code})</span></h1>
+      <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1">
           <div className="border border-gray-200 rounded-lg overflow-hidden">
             <div className="grid grid-cols-[2fr_1fr_1fr_1fr] bg-gry p-4 font-pop text-sm font-semibold">
-              <span>Product</span>
-              <span className="text-center">Price</span>
+              <span>{t('product')}</span>
+              <span className="text-center">{t('price')}</span>
               <span className="text-center">Quantity</span>
-              <span className="text-center">Subtotal</span>
+              <span className="text-center">{t('subtotal')}</span>
             </div>
             {items.map((item) => (
               <div
@@ -40,7 +48,7 @@ const Cart = () => {
                 className="grid grid-cols-[2fr_1fr_1fr_1fr] items-center p-4 border-t border-gray-200"
               >
                 <div className="flex items-center gap-4">
-                  <img src={item.image} alt={item.name} className="w-16 h-16 object-contain" />
+                  <img src={resolveProductImage(item)} alt={item.name} className="w-16 h-16 object-contain bg-gray-50 rounded" />
                   <div>
                     <Link to={`/product/${item.id}`} className="font-pop font-medium hover:text-primary">
                       {item.name}
@@ -54,7 +62,7 @@ const Cart = () => {
                     </button>
                   </div>
                 </div>
-                <span className="text-center font-pop">${item.price.toFixed(2)}</span>
+                <span className="text-center font-pop">{formatPrice(item.price)}</span>
                 <div className="flex justify-center">
                   <div className="flex items-center border border-gray-300 rounded-md">
                     <button
@@ -75,35 +83,38 @@ const Cart = () => {
                   </div>
                 </div>
                 <span className="text-center font-pop font-semibold">
-                  ${(item.price * item.qty).toFixed(2)}
+                  {formatPrice(item.price * item.qty)}
                 </span>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="w-80 shrink-0">
+        <div className="w-full lg:w-80 shrink-0">
           <div className="border border-gray-200 rounded-lg p-6 bg-gry">
-            <h3 className="font-pop font-bold text-lg mb-4">Cart Totals</h3>
+            <h3 className="font-pop font-bold text-lg mb-4">{t('yourCart')} — {t('total')}</h3>
             <div className="space-y-3 font-pop text-sm">
               <div className="flex justify-between">
-                <span>Subtotal</span>
-                <span>${total.toFixed(2)}</span>
+                <span>{t('subtotal')}</span>
+                <span>{formatPrice(total)}</span>
               </div>
               <div className="flex justify-between">
-                <span>Shipping</span>
-                <span>{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
+                <span>{t('shipping')}</span>
+                <span>{shippingUSD === 0 ? 'Free' : formatPrice(shippingUSD)}</span>
               </div>
               <div className="flex justify-between font-bold text-base border-t border-gray-300 pt-3">
-                <span>Total</span>
-                <span className="text-primary">${(total + shipping).toFixed(2)}</span>
+                <span>{t('total')}</span>
+                <span className="text-primary">{formatPrice(totalUSD)}</span>
+              </div>
+              <div className="pt-2 text-xs text-gray-500 text-right italic">
+                1 USD ≈ {currencyInfo.code === 'BDT' ? '৳119.50' : '$1.00'}
               </div>
             </div>
             <Link
               to="/checkout"
               className="block w-full text-center bg-primary text-white py-3 rounded-full font-pop text-sm font-semibold mt-6 hover:opacity-90"
             >
-              Proceed to Checkout
+              {t('checkout')}
             </Link>
           </div>
         </div>

@@ -3,11 +3,12 @@ import { Link } from 'react-router'
 import Container from './layout/Container'
 import ProductCard from '../components/ProductCard'
 import fruit from '../assets/images/fruit.webp'
+import { useTranslation } from '../hooks/useTranslation'
 
 const ProductShowcase = ({ allData, title, isCategory, viewAllLink }) => {
   const [showAll, setShowAll] = useState(false)
+  const { t } = useTranslation()
 
-  // Default to 1 row (5 items on 5-col grid) when showAll is false
   const displayedData = isCategory
     ? allData
     : (showAll ? allData : allData.slice(0, 5))
@@ -28,7 +29,7 @@ const ProductShowcase = ({ allData, title, isCategory, viewAllLink }) => {
             to={viewAllLink}
             className="text-green-600 font-semibold font-pop hover:underline text-sm sm:text-base lg:text-lg shrink-0"
           >
-            View All →
+            {t('viewAll')}
           </Link>
         ) : (
           <button
@@ -36,7 +37,7 @@ const ProductShowcase = ({ allData, title, isCategory, viewAllLink }) => {
             onClick={handleViewAllClick}
             className="text-green-600 font-semibold font-pop hover:underline text-sm sm:text-base lg:text-lg shrink-0 cursor-pointer"
           >
-            {showAll ? 'Show Less ←' : 'View All →'}
+            {showAll ? (t('previous') + ' ←') : t('viewAll')}
           </button>
         )}
       </div>

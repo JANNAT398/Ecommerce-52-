@@ -9,59 +9,51 @@ import InstagramSection from '../components/InstagramSection'
 import HotDeals from '../components/HotDeals'
 import { FaTruck, FaShieldAlt, FaUndo, FaHeadset } from 'react-icons/fa'
 import { categories, products } from '../data/products'
+import { useTranslation } from '../hooks/useTranslation'
 
-const featureData = [
-  { icon: <FaTruck className="text-primary text-3xl" />, title: 'Free Shipping', desc: 'Above $5 Only' },
-  { icon: <FaShieldAlt className="text-primary text-3xl" />, title: 'Secure Payment', desc: '100% Secure' },
-  { icon: <FaUndo className="text-primary text-3xl" />, title: 'Easy Return', desc: '3 Days Return' },
-  { icon: <FaHeadset className="text-primary text-3xl" />, title: 'Dedicated Support', desc: '24/7 Dedicated Support' }
+const featureDataKeys = [
+  { icon: <FaTruck className="text-primary text-3xl" />, titleKey: 'freeShipping', descKey: 'freeShippingSub' },
+  { icon: <FaShieldAlt className="text-primary text-3xl" />, titleKey: 'securePayment', descKey: 'securePaymentSub' },
+  { icon: <FaUndo className="text-primary text-3xl" />, titleKey: 'easyReturn', descKey: 'easyReturnSub' },
+  { icon: <FaHeadset className="text-primary text-3xl" />, titleKey: 'dedicatedSupport', descKey: 'dedicatedSupportSub' }
 ]
 
 const Home = () => {
+  const { t } = useTranslation()
   return (
     <>
-      {/* Banner Slider */}
       <Banner />
 
-      {/* Features Section */}
       <Container className="py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featureData.map((feature, index) => (
+          {featureDataKeys.map((feature, index) => (
             <div key={index} className="flex items-center gap-4 p-4 bg-gry rounded-xl">
               <div className="p-3 bg-white rounded-full">
                 {feature.icon}
               </div>
               <div>
-                <h4 className="font-pop font-bold">{feature.title}</h4>
-                <p className="font-pop text-sm text-gray-500">{feature.desc}</p>
+                <h4 className="font-pop font-bold">{t(feature.titleKey)}</h4>
+                <p className="font-pop text-sm text-gray-500">{t(feature.descKey)}</p>
               </div>
             </div>
           ))}
         </div>
       </Container>
 
-      {/* Popular Categories */}
-      <ProductShowcase allData={categories} title='Popular Categories' isCategory={true} />
-      
-      {/* Popular Products */}
-      <ProductShowcase allData={products} title='Popular Products' isCategory={false} />
-      
-      {/* Hot Deals Section */}
+      <ProductShowcase allData={categories} title={t('popularCategories')} isCategory={true} />
+
+      <ProductShowcase allData={products} title={t('popularProducts')} isCategory={false} />
+
       <HotDeals />
 
-      {/* Section 1 Below Hot Deals: Summer Sale Banner */}
       <SummerSaleBanner />
 
-      {/* Section 2 Below Hot Deals: Featured Products */}
-      <ProductShowcase allData={products} title='Featured Products' isCategory={false} />
-      
-      {/* Special Banner */}
+      <ProductShowcase allData={products} title={t('featuredProducts')} isCategory={false} />
+
       <SpecialBanner />
 
-      {/* Testimonials */}
       <Testimonials />
-      
-      {/* Instagram Section */}
+
       <InstagramSection />
     </>
   )
