@@ -7,7 +7,7 @@ import bestdeals3 from "../assets/images/bestdeals3.webp";
 
 
 const SpecialBanner = () => {
- const { total, days, hours, minutes, seconds } =
+  const { total, days, hours, minutes, seconds } =
     useCountdown("2026-11-31T23:59:59");
 
   if (total === 0) {

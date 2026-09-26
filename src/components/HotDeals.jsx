@@ -67,9 +67,8 @@ const SmallProductCard = ({ product, isSelected, onHover }) => {
       whileHover={{ y: -2, transition: { duration: 0.2 } }}
       whileTap={{ scale: 0.98 }}
       onMouseEnter={() => onHover(product.id)}
-      className={`bg-white border hover:shadow-md transition-all duration-300 relative group p-4 flex flex-col justify-between h-full cursor-pointer select-none ${
-        isSelected ? 'border-primary ring-2 ring-primary/30 shadow-md' : 'border-gray-200 hover:border-primary'
-      }`}
+      className={`bg-white border hover:shadow-md transition-all duration-300 relative group p-4 flex flex-col justify-between h-full cursor-pointer select-none ${isSelected ? 'border-primary ring-2 ring-primary/30 shadow-md' : 'border-gray-200 hover:border-primary'
+        }`}
     >
       <div>
         <div className="relative mb-3">

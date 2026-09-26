@@ -1,16 +1,19 @@
 @import "tailwindcss";
-@theme{
-     --color-primary:#00B207;
-     --color-badgeone:#EA4B48;
-     --color-badgetwo:#2388FF;
-     --color-gry:#F2F2F2;
-     --text-hsize:32px;
-     --font-pop: "Poppins", sans-serif;
+
+@theme {
+  --color-primary: #00B207;
+  --color-badgeone: #EA4B48;
+  --color-badgetwo: #2388FF;
+  --color-gry: #F2F2F2;
+  --text-hsize: 32px;
+  --font-pop: "Poppins", sans-serif;
 }
+
 @font-face {
   font-family: "Poppins";
   src: url("../src/assets/images/font/Poppins/Poppins-Regular.ttf") format("truetype");
 }
+
 .sidebar {
   padding: 10px;
   border-radius: 6px;
@@ -23,22 +26,25 @@
 .fromInput {
   @apply border border-gray-300 p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mt-3;
 }
-.sidebar{
-     padding: 10px;
-     border-radius: 6px;
-   }
-   .sidebar:hover{
-     background-color: #f3f4f6;
-   }
-   .fromInput{
-     @apply border border-gray-300 p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mt-3 
-   }
+
+.sidebar {
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.sidebar:hover {
+  background-color: #f3f4f6;
+}
+
+.fromInput {
+  @apply border border-gray-300 p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mt-3
+}
 
 
 .swiper-pagination {
   position: absolute;
-  bottom: 20px ;
-  left: 50% ;
+  bottom: 20px;
+  left: 50%;
   transform: translateX(-50%);
   z-index: 10;
   display: flex;
@@ -46,6 +52,7 @@
   justify-content: center;
   gap: 10px;
 }
+
 .slider3 .swiper-pagination {
   position: absolute;
   top: 50%;
@@ -76,9 +83,8 @@
   transition-duration: 400ms;
   background: rgba(255, 255, 255, 0.5);
 }
+
 .slider2 .swiper-scrollbar-drag {
   background: #ffffff;
   width: 100%;
 }
-
-

@@ -22,18 +22,18 @@ const Wishlist = () => {
   }
 
   return (
-    <Container className="py-12">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="font-pop text-2xl font-bold">My Wishlist ({items.length})</h1>
+    <Container className="py-8 sm:py-12">
+      <div className="flex justify-between items-center mb-6 sm:mb-8">
+        <h1 className="font-pop text-xl sm:text-2xl font-bold">My Wishlist ({items.length})</h1>
       </div>
-      <div className="grid grid-cols-4 gap-0 border border-gray-200">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {items.map((product) => (
-          <div key={product.id} className="relative">
+          <div key={product.id} className="relative group">
             <ProductCard product={product} />
             <button
               type="button"
               onClick={() => dispatch(removeFromWishlist(product.id))}
-              className="absolute top-2 left-2 text-xs bg-red-500 text-white px-2 py-1 rounded font-pop z-30"
+              className="absolute top-2 left-2 text-xs bg-red-500 hover:bg-red-600 text-white px-2.5 py-1 rounded font-pop z-30 shadow-xs transition-colors"
             >
               Remove
             </button>

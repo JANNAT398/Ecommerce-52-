@@ -26,26 +26,26 @@ const IstragramSection = () => {
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-6 gap-6 pb-15" ref={venoRef}>
           {images.map((img, index) => (
-          <div
-            key={index}
-            onClick={() => setDropdown(index)}
-            className="relative overflow-hidden rounded-xl cursor-pointer group"
-          >
-            <img
-              src={img}
-              alt="venobox"
-              className="duration-300 group-hover:scale-110"
-            />
+            <div
+              key={index}
+              onClick={() => setDropdown(index)}
+              className="relative overflow-hidden rounded-xl cursor-pointer group"
+            >
+              <img
+                src={img}
+                alt="venobox"
+                className="duration-300 group-hover:scale-110"
+              />
 
-            {/* Black Overlay */}
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 duration-300"></div>
+              {/* Black Overlay */}
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 duration-300"></div>
 
-            {/* Instagram Icon */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300 z-10">
-              <FaInstagram className="text-white text-4xl" />
+              {/* Instagram Icon */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300 z-10">
+                <FaInstagram className="text-white text-4xl" />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
         </div>
       </div>
 
@@ -54,13 +54,13 @@ const IstragramSection = () => {
           onClick={() => setDropdown(null)}
           className="w-full h-screen bg-[#00000072] top-0 left-0 fixed z-20 flex justify-center items-center"
         >
-           {/* Close Button */}
-    <button
-      onClick={() => setDropdown(null)}
-      className="absolute top-6 right-6 text-white text-5xl hover:text-red-500 duration-300 cursor-pointer"
-    >
-      <IoClose />
-    </button>
+          {/* Close Button */}
+          <button
+            onClick={() => setDropdown(null)}
+            className="absolute top-6 right-6 text-white text-5xl hover:text-red-500 duration-300 cursor-pointer"
+          >
+            <IoClose />
+          </button>
           <img className="w-100" src={images[dropdown]} alt="venobox" />
         </div>
       )}

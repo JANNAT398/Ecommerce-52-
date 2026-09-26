@@ -55,19 +55,19 @@ const Checkout = () => {
   }
 
   return (
-    <Container className="py-12">
-      <h1 className="font-pop text-2xl font-bold mb-8">Checkout</h1>
-      <form onSubmit={handleSubmit} className="flex gap-8">
+    <Container className="py-8 sm:py-12">
+      <h1 className="font-pop text-2xl font-bold mb-6 sm:mb-8">Checkout</h1>
+      <form onSubmit={handleSubmit} className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1 space-y-4">
           <h3 className="font-pop font-semibold text-lg">Billing Details</h3>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input name="firstName" required placeholder="First Name" onChange={handleChange} className="fromInput" />
             <input name="lastName" required placeholder="Last Name" onChange={handleChange} className="fromInput" />
           </div>
           <input name="email" type="email" required placeholder="Email" onChange={handleChange} className="fromInput" />
           <input name="phone" required placeholder="Phone" onChange={handleChange} className="fromInput" />
           <input name="address" required placeholder="Street Address" onChange={handleChange} className="fromInput" />
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input name="city" required placeholder="City" onChange={handleChange} className="fromInput" />
             <input name="zip" required placeholder="ZIP Code" onChange={handleChange} className="fromInput" />
           </div>
@@ -91,16 +91,16 @@ const Checkout = () => {
           </div>
         </div>
 
-        <div className="w-96 shrink-0">
-          <div className="border border-gray-200 rounded-lg p-6 bg-gry sticky top-4">
+        <div className="w-full lg:w-96 shrink-0">
+          <div className="border border-gray-200 rounded-lg p-6 bg-gry lg:sticky lg:top-4">
             <h3 className="font-pop font-bold text-lg mb-4">Order Summary</h3>
-            <div className="space-y-3 mb-4 max-h-60 overflow-y-auto">
+            <div className="space-y-3 mb-4 max-h-60 overflow-y-auto pr-1">
               {items.map((item) => (
                 <div key={item.id} className="flex justify-between font-pop text-sm">
-                  <span>
+                  <span className="line-clamp-1 pr-2">
                     {item.name} × {item.qty}
                   </span>
-                  <span>${(item.price * item.qty).toFixed(2)}</span>
+                  <span className="shrink-0">${(item.price * item.qty).toFixed(2)}</span>
                 </div>
               ))}
             </div>

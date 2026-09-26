@@ -27,6 +27,10 @@ const ProductCard = ({ product }) => {
 
   const handleWishlist = (e) => {
     e.stopPropagation()
+    if (product.inStock === false && !isWishlisted) {
+      toast.warning('This product is out of stock and cannot be added to wishlist')
+      return
+    }
     dispatch(toggleWishlist(product))
     toast.info(isWishlisted ? t('removedFromWishlist') : t('addedToWishlist'))
   }

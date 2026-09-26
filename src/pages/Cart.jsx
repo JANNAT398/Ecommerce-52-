@@ -35,58 +35,60 @@ const Cart = () => {
       <h1 className="font-pop text-2xl font-bold mb-8">{t('shoppingCart')} <span className="text-primary text-base font-normal ml-2">({currencyInfo.code})</span></h1>
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1">
-          <div className="border border-gray-200 rounded-lg overflow-hidden">
-            <div className="grid grid-cols-[2fr_1fr_1fr_1fr] bg-gry p-4 font-pop text-sm font-semibold">
-              <span>{t('product')}</span>
-              <span className="text-center">{t('price')}</span>
-              <span className="text-center">Quantity</span>
-              <span className="text-center">{t('subtotal')}</span>
-            </div>
-            {items.map((item) => (
-              <div
-                key={item.id}
-                className="grid grid-cols-[2fr_1fr_1fr_1fr] items-center p-4 border-t border-gray-200"
-              >
-                <div className="flex items-center gap-4">
-                  <img src={resolveProductImage(item)} alt={item.name} className="w-16 h-16 object-contain bg-gray-50 rounded" />
-                  <div>
-                    <Link to={`/product/${item.id}`} className="font-pop font-medium hover:text-primary">
-                      {item.name}
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => dispatch(removeFromCart(item.id))}
-                      className="block text-red-500 text-xs font-pop mt-1 hover:underline"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </div>
-                <span className="text-center font-pop">{formatPrice(item.price)}</span>
-                <div className="flex justify-center">
-                  <div className="flex items-center border border-gray-300 rounded-md">
-                    <button
-                      type="button"
-                      onClick={() => dispatch(updateQty({ id: item.id, qty: item.qty - 1 }))}
-                      className="px-3 py-1"
-                    >
-                      −
-                    </button>
-                    <span className="px-3 py-1 border-x border-gray-300 font-pop text-sm">{item.qty}</span>
-                    <button
-                      type="button"
-                      onClick={() => dispatch(updateQty({ id: item.id, qty: item.qty + 1 }))}
-                      className="px-3 py-1"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-                <span className="text-center font-pop font-semibold">
-                  {formatPrice(item.price * item.qty)}
-                </span>
+          <div className="border border-gray-200 rounded-lg overflow-x-auto">
+            <div className="min-w-[500px]">
+              <div className="grid grid-cols-[2fr_1fr_1fr_1fr] bg-gry p-4 font-pop text-sm font-semibold">
+                <span>{t('product')}</span>
+                <span className="text-center">{t('price')}</span>
+                <span className="text-center">Quantity</span>
+                <span className="text-center">{t('subtotal')}</span>
               </div>
-            ))}
+              {items.map((item) => (
+                <div
+                  key={item.id}
+                  className="grid grid-cols-[2fr_1fr_1fr_1fr] items-center p-4 border-t border-gray-200"
+                >
+                  <div className="flex items-center gap-4">
+                    <img src={resolveProductImage(item)} alt={item.name} className="w-14 h-14 sm:w-16 sm:h-16 object-contain bg-gray-50 rounded" />
+                    <div className="min-w-0">
+                      <Link to={`/product/${item.id}`} className="font-pop font-medium text-sm sm:text-base hover:text-primary line-clamp-2">
+                        {item.name}
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => dispatch(removeFromCart(item.id))}
+                        className="block text-red-500 text-xs font-pop mt-1 hover:underline"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                  <span className="text-center font-pop text-sm">{formatPrice(item.price)}</span>
+                  <div className="flex justify-center">
+                    <div className="flex items-center border border-gray-300 rounded-md">
+                      <button
+                        type="button"
+                        onClick={() => dispatch(updateQty({ id: item.id, qty: item.qty - 1 }))}
+                        className="px-2.5 py-1 text-sm"
+                      >
+                        −
+                      </button>
+                      <span className="px-2.5 py-1 border-x border-gray-300 font-pop text-xs sm:text-sm">{item.qty}</span>
+                      <button
+                        type="button"
+                        onClick={() => dispatch(updateQty({ id: item.id, qty: item.qty + 1 }))}
+                        className="px-2.5 py-1 text-sm"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <span className="text-center font-pop font-semibold text-sm">
+                    {formatPrice(item.price * item.qty)}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

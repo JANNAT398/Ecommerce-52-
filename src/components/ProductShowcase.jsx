@@ -50,11 +50,10 @@ const ProductShowcase = ({ allData, title, isCategory, viewAllLink }) => {
               <Link
                 key={item.slug || item.id || item.name}
                 to={`/shop?category=${item.slug}`}
-                className={`group border rounded-lg p-3 sm:p-4 transition-all duration-300 cursor-pointer bg-white flex flex-col items-center justify-between ${
-                  isSelected
+                className={`group border rounded-lg p-3 sm:p-4 transition-all duration-300 cursor-pointer bg-white flex flex-col items-center justify-between ${isSelected
                     ? 'border-primary text-primary shadow-sm'
                     : 'border-gray-200 text-gray-800 hover:border-primary hover:text-primary hover:shadow-md'
-                }`}
+                  }`}
               >
                 <div className="w-full h-28 sm:h-32 md:h-36 flex items-center justify-center mb-2 sm:mb-3 overflow-hidden">
                   <img
